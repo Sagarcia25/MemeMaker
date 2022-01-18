@@ -15,30 +15,18 @@ class ViewController: UIViewController {
     @IBOutlet var topLabel: UILabel!
     @IBOutlet var bottomLabel: UILabel!
     
-    
-    
-    let topChoices = [
-        CaptionOption(emoji: "🐕", caption: "When you tell your dog to stop barking"),
-        CaptionOption(emoji: "🧸", caption: "When you tell your dog to fetch the toy"),
-        CaptionOption(emoji: "🍗", caption: "When you tell your dog time to eat")
-                    ]
-    
-    let bottomChoices = [
-        CaptionOption(emoji: "😭", caption: "The dog starts howling instead"),
-        CaptionOption(emoji: "📱", caption: "They take your phone awy from your hand"),
-        CaptionOption(emoji: "🌮", caption: "The dog takes your food away")
-    ]
+    let captionArrays = CaptionArrays()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topSegmentedControl.removeAllSegments()
         bottomSegmentedControl.removeAllSegments()
-        for choice in topChoices{
-            topSegmentedControl.insertSegment(withTitle: choice.emoji, at: topChoices.count, animated: false)
+        for choice in captionArrays.topChoices{
+            topSegmentedControl.insertSegment(withTitle: choice.emoji, at: captionArrays.topChoices.count, animated: false)
         }
         
-        for choice in bottomChoices {
-            bottomSegmentedControl.insertSegment(withTitle: choice.emoji, at: bottomChoices.count, animated: false)
+        for choice in captionArrays.bottomChoices{
+            bottomSegmentedControl.insertSegment(withTitle: choice.emoji, at: captionArrays.bottomChoices.count, animated: false)
         }
         bottomSegmentedControl.selectedSegmentIndex = 0
         topSegmentedControl.selectedSegmentIndex = 0
@@ -50,8 +38,8 @@ class ViewController: UIViewController {
     }
     
     func updateUI(){
-        topLabel.text = topChoices[topSegmentedControl.selectedSegmentIndex].caption
-        bottomLabel.text = bottomChoices[bottomSegmentedControl.selectedSegmentIndex].caption
+        topLabel.text = captionArrays.topChoices[topSegmentedControl.selectedSegmentIndex].caption
+        bottomLabel.text = captionArrays.bottomChoices[bottomSegmentedControl.selectedSegmentIndex].caption
     }
     
     @IBAction func dragTopLabel(_ sender: UIPanGestureRecognizer) {
